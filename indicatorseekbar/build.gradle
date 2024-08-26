@@ -1,12 +1,13 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
-def VERSION_NAME = "2.1.2"
+def VERSION_NAME = "2.1.7"
 
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'indicatorseekbar'
 
-    publishedGroupId = 'com.github.warkiz.widget'
+    publishedGroupId = 'com.github.fedorkz.widget'
     libraryName = 'IndicatorSeekbar'
     artifact = 'indicatorseekbar'
 
@@ -40,6 +41,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
         }
     }
 }
